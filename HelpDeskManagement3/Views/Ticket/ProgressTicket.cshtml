@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Model.TicketTable>
+
+@{
+    ViewBag.Title = "ProgressTicket";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/Dashboard/ProgressTicket.css" rel="stylesheet" />
+<link href="~/Content/Dashboard/ShowTicket.css" rel="stylesheet" />
+<div class="Ticketscards">
+    <div class="ticketcard1">
+        <h1>
+            <a href="@Url.Action("OpenTicket","Ticket")">Open Ticket</a>
+        </h1>
+    </div>
+    <div class="ticketcard1" style="background-color:darkolivegreen">
+        <h1>
+            <a href="@Url.Action("CloseTicket", "Ticket")">Close Ticket</a>
+        </h1>
+    </div>
+    <div class="ticketcard1" style="background-color:indianred">
+        <h1>
+            <a href="@Url.Action("ProgressTicket","Ticket" )">Progress Ticket</a>
+        </h1>
+    </div>
+
+</div>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dept_ID)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Status)*@
+                        @if (item.Status == 0)
+                        {
+                            <p>Open</p>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <p>Progress</p>
+                        }
+                        else
+                        {
+                            <p>Close</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dept_ID)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>*@
+                    <td>
+                    <td class="designedit">
+
+                        @Html.ActionLink("Edit", "AdminEditStatus", new { id = item.Ticket_Id }) |
+                        @Html.ActionLink("Details", "AdminShowDetails", new { id = item.Ticket_Id }) |
+                        @Html.ActionLink("Delete", "AdminDeleteTask", new { id = item.Ticket_Id })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Model.TicketTable>
+
+@{
+    ViewBag.Title = "Showticketstable";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/AllTable.css" rel="stylesheet" />
+
+<div class="table-wrapper">
+    <table class="fl-table">
+
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Dept_List)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Dep_ID)
+                </th>*@
+                <th>Action</th>
+            </tr>
+            </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dept_List)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Dep_ID)
+                    </td>*@
+                    <td class="designedit">
+                        @Html.ActionLink("Edit", "EditTickets", new { id = item.Ticket_Id }, new { id = "tiid" })
+
+                        @Html.ActionLink("Delete", "TicketDelete", new { id = item.Ticket_Id }, new { id = "deletebutton" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+  </div>
